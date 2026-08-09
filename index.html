@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background-color: lightgray;
+        }
+
+        .calculator{
+            width: 300px;
+            margin: 50px auto;
+            
+            border: 2px solid black;
+            
+            background: white;
+            text-align: center;
+        }
+
+        input{
+            width: 250px;
+            height: 35px;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        button{
+            width: 55px;
+            height: 50px;
+            font-size: 18px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+<h2><u>Calculator</u></h2>
+
+<input type="text" id="display" readonly><br>
+
+<button onclick="append('7')">7</button>
+<button onclick="append('8')">8</button>
+<button onclick="append('9')">9</button>
+<button onclick="setOperator('/')">÷</button><br>
+
+<button onclick="append('4')">4</button>
+<button onclick="append('5')">5</button>
+<button onclick="append('6')">6</button>
+<button onclick="setOperator('*')">×</button><br>
+
+<button onclick="append('1')">1</button>
+<button onclick="append('2')">2</button>
+<button onclick="append('3')">3</button>
+<button onclick="setOperator('-')">-</button><br>
+
+<button onclick="clearDisplay()">C</button>
+<button onclick="append('0')">0</button>
+<button onclick="calculate()">=</button>
+<button onclick="setOperator('+')">+</button>
+
+</div>
+
+<script>
+
+let num1 = "";
+let num2 = "";
+let op = "";
+
+function append(value){
+    document.getElementById("display").value += value;
+
+    if(op == "")
+        num1 += value;
+    else
+        num2 += value;
+}
+
+function setOperator(operator){
+    op = operator;
+    document.getElementById("display").value += operator;
+}
+
+function calculate(){
+
+    let a = Number(num1);
+    let b = Number(num2);
+    let ans;
+
+    if(op == "+"){
+        ans = a + b;
+    }
+    else if(op == "-"){
+        if(a>b)
+            ans = a-b;
+        else
+            ans = b-a;
+    }
+    else if(op == "*"){
+        ans = a*b;
+    }
+    else if(op == "/"){
+        if(b==0){
+            ans = "Cannot divide by zero";
+        }
+        else{
+            ans = a/b;
+        }
+    }
+
+    document.getElementById("display").value = ans;
+
+    num1 = "";
+    num2 = "";
+    op = "";
+}
+
+function clearDisplay(){
+    document.getElementById("display").value = "";
+    num1 = "";
+    num2 = "";
+    op = "";
+}
+
+</script>
+
+</body>
+</html>
